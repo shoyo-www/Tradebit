@@ -1,0 +1,47 @@
+import 'package:dartz/dartz.dart';
+import 'package:tradebit_app/core/error/failures.dart';
+import 'package:tradebit_app/data/datasource/remote/models/request/basic_Email.dart';
+import 'package:tradebit_app/data/datasource/remote/models/request/change_password.dart';
+import 'package:tradebit_app/data/datasource/remote/models/request/email_register.dart';
+import 'package:tradebit_app/data/datasource/remote/models/request/forgot_request.dart';
+import 'package:tradebit_app/data/datasource/remote/models/request/google_request.dart';
+import 'package:tradebit_app/data/datasource/remote/models/request/login_request.dart';
+import 'package:tradebit_app/data/datasource/remote/models/request/mobile_request.dart';
+import 'package:tradebit_app/data/datasource/remote/models/request/mobile_verification.dart';
+import 'package:tradebit_app/data/datasource/remote/models/request/otp_rquest.dart';
+import 'package:tradebit_app/data/datasource/remote/models/request/phone_forgot_request.dart';
+import 'package:tradebit_app/data/datasource/remote/models/request/register_email_request.dart';
+import 'package:tradebit_app/data/datasource/remote/models/request/register_mobile_request.dart';
+import 'package:tradebit_app/data/datasource/remote/models/request/register_phone_request.dart';
+import 'package:tradebit_app/data/datasource/remote/models/request/resend_otp.dart';
+import 'package:tradebit_app/data/datasource/remote/models/request/update_profile.dart';
+import 'package:tradebit_app/data/datasource/remote/models/request/validate_mobile.dart';
+import 'package:tradebit_app/data/datasource/remote/models/response/common_response.dart';
+import 'package:tradebit_app/data/datasource/remote/models/response/google_login_response.dart';
+import 'package:tradebit_app/data/datasource/remote/models/response/login_response.dart';
+import 'package:tradebit_app/data/datasource/remote/models/response/otp_email_response.dart';
+import 'package:tradebit_app/data/datasource/remote/models/response/register_email_response.dart';
+import 'package:tradebit_app/data/datasource/remote/models/response/register_verify_otp.dart';
+import 'package:tradebit_app/data/datasource/remote/models/response/resend_otp_response.dart';
+import '../../data/datasource/remote/models/response/register_mobile_response.dart';
+
+abstract class AuthRepository {
+  Future<Either<Failure, LoginResponse>> login(LoginRequest loginParams);
+  Future<Either<Failure, OtpEmailResponse>> otpLogin(OtpRequestMobile otpParams);
+  Future<Either<Failure, LoginResponse>> mobileLogin(MobileRequest mobileParams);
+  Future<Either<Failure, RegisterEmailResponse>> registerEmail(RegisterEmailRequest emailParams);
+  Future<Either<Failure, RegisterMobileResponse>> registerMobile(RegisterMobileRequest mobileParams);
+  Future<Either<Failure, CommonResponse>> registerByMobile(RegisterMobileOtpRequest mobileParams);
+  Future<Either<Failure, CommonResponse>> forgotByEmail(ForgotByEmailRequest mobileParams);
+  Future<Either<Failure, CommonResponse>> forgotByPhone(ForgotByMobile mobile);
+  Future<Either<Failure, GoogleLoginResponse>> googleLogin(GoogleLoginrequest request);
+  Future<Either<Failure, GoogleLoginResponse>> googleLoginMobile(OtpRequestMobile request);
+  Future<Either<Failure, VerifyRegisterEmail>> verifyEmailRegister(RegisterEmailOtpRequest request);
+  Future<Either<Failure, CommonResponse>> verifyMobileRegister(RegisterMobileRequest request);
+  Future<Either<Failure, CommonResponse>> changePassword(ChangePasswordRequest request);
+  Future<Either<Failure, ResendOtpResponse>> resendOtp(ResendOtpRequest request);
+  Future<Either<Failure, CommonResponse>> basicDetailsMobile(VerifyMobileRequest request);
+  Future<Either<Failure, CommonResponse>> validateProfile(ValidateMobileProfile request);
+  Future<Either<Failure, CommonResponse>> updateProfile(UpdateProfileRequest request);
+  Future<Either<Failure, CommonResponse>> basicEmail(BasicProfileEmailCode request);
+}
